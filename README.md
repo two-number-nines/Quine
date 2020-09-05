@@ -1,7 +1,7 @@
 # Quine
 
 # Colleen
-When executed, the program must display on the standard output an output iden-tical to the source code of the file used to compile the program.
+When executed, the program must display on the standard output an output identical to the source code of the file used to compile the program.
 
 # Grace
 When executed, the program writes in a file named Grace_kid.c the source code of the file used to compile the program.
