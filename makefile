@@ -1,6 +1,6 @@
 ### COMPILATION ###
 CC     = gcc
-FLAGS  = -Wall -Wextra -Werror
+FLAGS  = -c -Wall -Wextra -Werror
 
 ### EXECUTABLE ###
 NAME1   = Colleen
@@ -8,7 +8,6 @@ NAME2   = Grace
 NAME3   = Sully
 
 ### INCLUDES ###
-OBJ_PATH  = objs
 SRC_PATH  = C
 
 ### SOURCES ###
@@ -21,23 +20,28 @@ SRCS_G = $(addprefix $(SRC_PATH)/,$(SOURCES_G))
 SRCS_S = $(addprefix $(SRC_PATH)/,$(SOURCES_S))
 
 ### OBJECTS ###
-OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
+OBJ_C = $(SOURCES_C:.c=.o)
+OBJ_G = $(SOURCES_G:.c=.o)
+OBJ_S = $(SOURCES_S:.c=.o)
 
 ### RULES ###
 
 all: $(NAME1) $(NAME2) $(NAME3)
 
 $(NAME1):
-	@$(CC) $(SRCS_C) $(FLAGS) -o $@ $^
-	@echo "Projects successfully compiled"
+	@$(CC) $(SRCS_C) $(FLAGS)
+	@$(CC) -o $(NAME1) $(OBJ_C)
+	@echo "Project Colleen compiled"
 
 $(NAME2):
-	@$(CC) $(SRCS_G) $(FLAGS) -o $@ $^
-	@echo "Projects successfully compiled"
+	@$(CC) $(SRCS_G) $(FLAGS)
+	@$(CC) -o $(NAME2) $(OBJ_G)
+	@echo "Project Grace compiled"
 
 $(NAME3):
-	@$(CC) $(SRCS_S) $(FLAGS) -o $@ $^
-	@echo "Projects successfully compiled"
+	@$(CC) $(SRCS_S) $(FLAGS)
+	@$(CC) -o $(NAME3) $(OBJ_S)
+	@echo "Project Sully compiled"
 
 clean:
 	@echo "Cleaning..."
@@ -45,11 +49,10 @@ clean:
 
 fclean:
 	@echo "Fcleaning..."
+	@rm -f *.o
 	@rm -f $(NAME1)
 	@rm -f $(NAME2)
 	@rm -f $(NAME3)
 
 re: fclean
 	@$(MAKE) all -j
-
-.PHONY: temporary, re, fclean, clean
